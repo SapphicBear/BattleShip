@@ -1,0 +1,24 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "BattleShip in the browser!",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SapphicBear/BattleShip.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/SapphicBear/BattleShip/issues"
+  },
+  "homepage": "https://github.com/SapphicBear/BattleShip#readme",
+  "devDependencies": {
+    "jest": "^30.2.0"
+  }
+}
