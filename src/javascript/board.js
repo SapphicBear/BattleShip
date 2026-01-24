@@ -17,19 +17,19 @@ export class Board {
             throw new Error("getCoords error: array length issue");
         } 
         const [row, col] = array;
-        if (this.board[row] > 9 || this.board[col] > 9) {
+        if (row > 9 || col > 9 || row < 0 || col < 0) {
             throw new Error("getCoords error: coordinates out of bounds");
         }
         return {row, col};
     }
     checkGrid(array) {
         // Check grid for a ship based on the coordinantes, mark miss if none, mark hit if ship.
-        const [row, col] = this.getCoords(array);
-        if (this.grid[row][col] === Board.shipMarker) {
-            this.grid[row][col] = Board.hitMarker;
+        const c = this.getCoords(array);
+        if (this.grid[c.row][c.col] === Board.shipMarker) {
+            this.grid[c.row][c.col] = Board.hitMarker;
             return true;
         } else {
-            this.grid[row][col] = Board.missMarker;
+            this.grid[c.row][c.col] = Board.missMarker;
             return false;
         }
         
@@ -40,7 +40,6 @@ export class Board {
 
 }
 let board = new Board();
-board.checkGrid([2, 0]);
-console.log(board.grid);
+
 
 // Create multiple boards for players and for keeping track of hits and misses
