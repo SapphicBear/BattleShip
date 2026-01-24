@@ -13,10 +13,11 @@ export class Board {
     }
     getCoords(array) {
         // recieves coordinate array and splits them and checks if they are in bounds.
-        if (array.length < 2 || array.length > 2) {
+        if (array.length < 2) {
             throw new Error("getCoords error: array length issue");
         } 
         const [row, col] = array;
+        
         if (row > 9 || col > 9 || row < 0 || col < 0) {
             throw new Error("getCoords error: coordinates out of bounds");
         }
@@ -34,14 +35,28 @@ export class Board {
         }
         
     }
-    setShip(array) {
+    setShip(array, size) {
         // set ship placement in grid Change to 1.
-        const c = this.getCoords(array);
-        if (this.grid[c.row][c.col] == 1) {
-            return false;
-        } 
-        this.grid[c.row][c.col] = 1;
-        return true;
+        if (size == 1) {
+            const c = this.getCoords(array);
+            if (this.grid[c.row][c.col] == Board.shipMarker) {
+                return false;
+            } else {
+                this.grid[c.row][c.col] = Board.shipMarker;
+                return true;
+            }
+        } else {
+            for (let i = 0; i < size; i++) {
+                let c = this.getCoords(array[i]);
+                if (this.grid[c.row][c.col] == Board.shipMarker) {
+                    return false;
+                } else {
+                    this.grid[c.row][c.col] = Board.shipMarker;
+                    continue;
+                }
+            }
+            return true;
+        }
     }
 
 }
