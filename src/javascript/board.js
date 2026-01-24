@@ -34,8 +34,14 @@ export class Board {
         }
         
     }
-    setShip(coordinates) {
+    setShip(array) {
         // set ship placement in grid Change to 1.
+        const c = this.getCoords(array);
+        if (this.grid[c.row][c.col] == 1) {
+            return false;
+        } 
+        this.grid[c.row][c.col] = 1;
+        return true;
     }
 
 }
