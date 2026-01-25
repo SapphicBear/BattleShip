@@ -1,4 +1,5 @@
 import {Board} from "./board.js"
+import { Battleship, Carrier, Cruiser, Scout } from "./ship.js";
 export class Player {
     static maxShips = 10;
     static maxScouts = 4;
@@ -86,7 +87,7 @@ export class CPU extends Player {
             let coords = this.getShipCoords(4);
             let carrier = this.board.setShip(coords, 4);
             if (carrier == true) {
-                this.ships[`carrier`] = coords;
+                this.ships[`carrier`] = new Carrier(coords);
                 count++;
                 break;
             } else {
@@ -99,7 +100,7 @@ export class CPU extends Player {
                 if (battleship == true) {
                     count++;
                     i++;
-                    this.ships[`battleship${i}`] = coords;
+                    this.ships[`battleship${i}`] = new Battleship(coords);
                 } else {
                     continue;
                 }
@@ -109,7 +110,7 @@ export class CPU extends Player {
                 let coords = this.getShipCoords(2);
                 let cruiser = this.board.setShip(coords, 2);
                 if (cruiser == true) {
-                    this.ships[`cruiser${i}`] = coords;
+                    this.ships[`cruiser${i}`] = new Cruiser(coords);
                     count++; 
                     i++;
                 } else {
@@ -120,7 +121,7 @@ export class CPU extends Player {
                 let coords = this.getShipCoords(1);
                 let scout = this.board.setShip(coords, 1);
                 if (scout == true) {
-                    this.ships[`scout${i}`] = coords;
+                    this.ships[`scout${i}`] = new Scout(coords);
                     count++;
                     i++;
                 } else {
@@ -132,7 +133,6 @@ export class CPU extends Player {
     }
 
 }
-
 // Create a CPU player and a human player, track scores and have individual boards
 // to track if the player is marked as a cpu or not
 // we need possibly to make a subclass, and put computational stuff in that one that is specifically for the CPU player.

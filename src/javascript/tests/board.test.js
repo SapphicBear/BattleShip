@@ -24,5 +24,4 @@ it("test lateral placement", () => {
 });
 it("test placement failure, showing that none of the grid points are pushed if one intersects", () => {
     expect(board.setShip([[1,1],[1,2], [1,0]], 3)).toBe(false);
-    console.log(board.grid)
 });
