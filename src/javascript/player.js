@@ -151,9 +151,6 @@ export class CPU extends Player {
         return true;
     }
 }
-let player = new Player("Human");
-let co = [[0,1],[0,2],[0,3]];
-console.log(player.getCoords(co))
 // Create a CPU player and a human player, track scores and have individual boards
 // to track if the player is marked as a cpu or not
 // we need possibly to make a subclass, and put computational stuff in that one that is specifically for the CPU player.
