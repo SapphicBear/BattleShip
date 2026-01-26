@@ -10,7 +10,7 @@ export class Player {
     ships = {};
     isCPU = false;
     board = new Board();
-    
+    totalShips = Object.keys(this.ships).length;
 
     constructor(name) {
         this.name = name;
@@ -31,7 +31,7 @@ export class Player {
     }
     placeShip(ship) {
         // check if the player has placed the max amount of ships
-        if (Object.keys(this.ships).length == Player.maxShips) {
+        if (this.totalShips >= Player.maxShips) {
             return false;
         }
         // check if the coords given are correct
