@@ -15,10 +15,16 @@ export class Player {
     constructor(name) {
         this.name = name;
     }
-    // Get input from user which grid tiles will be pushed to the board class for the turn. 
-    // keep track of turns.
-    setUp() {
 
+    placeShip(coords, ship) {
+        // check if the player has placed the max amount of ships
+        if (Object.keys(this.ships).length == Player.maxShips) {
+            return false;
+        }
+        // check if the coords given are correct
+        this.ships[`$${ship}`] = new ship(coords);
+        this.board.setShip(coords, ship.size);
+        return true;
     }
 }
 
