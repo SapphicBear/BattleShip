@@ -1,7 +1,8 @@
 class Ship {
     isSunk = false;
-    constructor(size, location) {
+    constructor(size, location, name) {
         this.size = size;
+        this.name = `${name}`;
         this.location = location;
         this.health = this.size;
     }
@@ -13,28 +14,32 @@ class Ship {
         }
         return true;
     }
+    setLocation(newLocation) {
+        this.location = newLocation;
+    }
 }
 class Carrier extends Ship {
-    constructor(location) {
-        super(4, location);
+    constructor(location, name = `Carrier`) {
+        super(4, location, name);
+        Carrier.count++;
     }
 }
 
 class Battleship extends Ship {
-    constructor(location) {
-        super(3, location);
+    constructor(location, name = `Battleship`) {
+        super(3, location, name);
     }
 }
 
 class Cruiser extends Ship {
-    constructor(location) {
-        super(2, location);
+    constructor(location, name = `Crusier`) {
+        super(2, location, name);
     }
 }
 
 class Scout extends Ship {
-    constructor(location) {
-        super(1, location);
+    constructor(location, name = `Scout`) {
+        super(1, location, name);
     }
 }
 

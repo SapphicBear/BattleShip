@@ -10,6 +10,7 @@ export class Player {
     ships = {};
     isCPU = false;
     board = new Board();
+    previewBoard;
     totalShips = Object.keys(this.ships).length;
 
     constructor(name) {
@@ -29,15 +30,26 @@ export class Player {
         });
         return coords;
     }
+
     placeShip(ship) {
         // check if the player has placed the max amount of ships
+        this.previewBoard = new Board();
         if (this.totalShips >= Player.maxShips) {
             return false;
         }
-        // check if the coords given are correct
-        this.ships[`${ship}`] = ship;
-        this.board.setShip(ship.location, ship.size);
+        this.ships[ship.name] = ship;
+        this.previewBoard.setShip(ship.location, ship.size);
+
         return true;
+    }
+
+    finalPlace() {
+        let ships = Object.values(this.ships);
+        for (let i = 0; i < ships.length; i++) {
+            this.board.setShip(ships[i].location, ships[i].size)
+        }
+        return true;
+       
     }
 }
 
@@ -106,7 +118,7 @@ export class CPU extends Player {
             let coords = this.getShipCoords(4);
             let carrier = this.board.setShip(coords, 4);
             if (carrier == true) {
-                this.ships[`carrier`] = new Carrier(coords);
+                this.ships.carrier = new Carrier(coords);
                 count++;
                 break;
             } else {
@@ -119,7 +131,7 @@ export class CPU extends Player {
                 if (battleship == true) {
                     count++;
                     i++;
-                    this.ships[`battleship${i}`] = new Battleship(coords);
+                    this.ships[`Battleship${i}`] = new Battleship(coords);
                 } else {
                     continue;
                 }
@@ -129,7 +141,7 @@ export class CPU extends Player {
                 let coords = this.getShipCoords(2);
                 let cruiser = this.board.setShip(coords, 2);
                 if (cruiser == true) {
-                    this.ships[`cruiser${i}`] = new Cruiser(coords);
+                    this.ships[`Cruiser${i}`] = new Cruiser(coords)
                     count++; 
                     i++;
                 } else {
@@ -140,7 +152,7 @@ export class CPU extends Player {
                 let coords = this.getShipCoords(1);
                 let scout = this.board.setShip(coords, 1);
                 if (scout == true) {
-                    this.ships[`scout${i}`] = new Scout(coords);
+                    this.ships[`Scout${i}`] = new Scout(coords)
                     count++;
                     i++;
                 } else {
