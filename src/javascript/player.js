@@ -15,15 +15,28 @@ export class Player {
     constructor(name) {
         this.name = name;
     }
-
-    placeShip(coords, ship) {
+    getCoords(array) {
+        let coords = [];
+        let firstPlace = array[0];
+        coords.push(firstPlace)
+        array.forEach((item) => {
+            if (item[0] == firstPlace[0] + 1 || item[0] == firstPlace[0] - 1 || item[1] == firstPlace[1] + 1 || item[1] == firstPlace[1] - 1) {
+                coords.push(item);
+                firstPlace = item;
+            } else {
+                return false;
+            }
+        });
+        return coords;
+    }
+    placeShip(ship) {
         // check if the player has placed the max amount of ships
         if (Object.keys(this.ships).length == Player.maxShips) {
             return false;
         }
         // check if the coords given are correct
-        this.ships[`$${ship}`] = new ship(coords);
-        this.board.setShip(coords, ship.size);
+        this.ships[`${ship}`] = ship;
+        this.board.setShip(ship.location, ship.size);
         return true;
     }
 }
@@ -137,8 +150,10 @@ export class CPU extends Player {
         }
         return true;
     }
-
 }
+let player = new Player("Human");
+let co = [[0,1],[0,2],[0,3]];
+console.log(player.getCoords(co))
 // Create a CPU player and a human player, track scores and have individual boards
 // to track if the player is marked as a cpu or not
 // we need possibly to make a subclass, and put computational stuff in that one that is specifically for the CPU player.
