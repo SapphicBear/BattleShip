@@ -8,7 +8,5 @@ it("CPU init should return an object with 10 items", () => {
 });
 it("test human player setting ship", () => {
     const player = new Player("Human");
-    expect(player.placeShip(new Battleship(player.getCoords([[0,2],[1,2],[2,2]])))).toBe(true);
-    console.log(player.board);
-    console.log(player.ships, Object.keys(player.ships).length)
+    expect(player.placeShip(new Battleship(player.getCoord([[0,2],[1,2],[2,2]])))).toBe(true);
 });

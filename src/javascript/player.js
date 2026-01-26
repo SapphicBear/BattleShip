@@ -15,7 +15,7 @@ export class Player {
     constructor(name) {
         this.name = name;
     }
-    getCoords(array) {
+    getCoord(array) {
         let coords = [];
         let firstPlace = array[0];
         coords.push(firstPlace)
