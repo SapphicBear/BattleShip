@@ -21,7 +21,6 @@ class Ship {
 class Carrier extends Ship {
     constructor(location, name = `Carrier`) {
         super(4, location, name);
-        Carrier.count++;
     }
 }
 
