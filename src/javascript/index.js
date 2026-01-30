@@ -10,6 +10,10 @@ const DOM = {
 };
 
 const game = {
+    isRunning: false,
+    player: null,
+    cpu: null,
+    currentPlayer: null,
     userInput() {
         let input = parseInt(prompt("Enter coordinates of attack! "));
         if (input == NaN) {
@@ -19,11 +23,39 @@ const game = {
         }
     },
     initialize() {
-        const player = new Player(prompt("Please enter your name: "));
-        const cpu = new CPU();
-        cpu.initializeBoard();
+        this.player = new Player(prompt("Please enter your name: "));
+        this.cpu = new CPU();
+        this.cpu.initializeBoard();
+        this.player.initializeBoard();
+        this.isRunning = true;
+        this.currentPlayer = this.player; // human player goes first everytime
     },
-    handler() {
+    handler() {        
+        while (this.isRunning) {
+            // Listeners for board start
+            // DOM draw field / update field
+            if (this.currentPlayer == this.player) {
+                let coords = this.player.getCoords(this.userInput());
+                let result = this.cpu.board.checkGrid(coords);
+                if (result) {
+                    // find ship based on coords mark hit
+                    // foundship.takeHit();
+                    // change DOM to make hit
+                }
+                this.currentPlayer = this.cpu;
+                continue;
+            } else {
+                let coords = this.cpu.getCoords();
+                let result = this.player.board.checkGrid(coords);
+                if (result) {
+                    // find ship based on coords mark hit
+                    // foundship.takeHit();
+                    // change dom to keep track of hit
+                }
+                this.currentPlayer = this.player;
+                continue;
+            }
 
+        }
     },
 };
