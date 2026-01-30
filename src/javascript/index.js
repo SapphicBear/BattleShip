@@ -5,16 +5,25 @@ import "../styles.css";
 
 console.log("Success! Javascript connected!");
 
-const gameHandler = () => {
-    // get name from user, make characters
-    // const player = new Player(username);
-    // const cpu = new CPU();
-    let gameReady = false;
-    // listen for placing ships
-    // once all ships are placed, run player.finalPlace();
-    // then run cpu.initializeBoard();
-    // set gameReady = true;
-    const turn = () => {
-        // keep track of who's turn it is. 
-    };
+const DOM = {
+
+};
+
+const game = {
+    userInput() {
+        let input = parseInt(prompt("Enter coordinates of attack! "));
+        if (input == NaN) {
+            return false;
+        } else {
+            return input.split("")
+        }
+    },
+    initialize() {
+        const player = new Player(prompt("Please enter your name: "));
+        const cpu = new CPU();
+        cpu.initializeBoard();
+    },
+    handler() {
+
+    },
 };
