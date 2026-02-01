@@ -37,6 +37,7 @@ const game = {
             if (playerCount === Player.maxShips || cpuCount === CPU.maxShips) {
                 this.isRunning = false;
                 // gameover handler
+                break;
             }
             // Listeners for board start
             // DOM draw field / update field
