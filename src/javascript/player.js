@@ -56,7 +56,7 @@ export class Player {
     getMoveMult() {
         return Math.floor(Math.random() * 20);
     }
-    getCoord() {
+    getCoords() {
         // return two numbers between 0 and 9 and save to coordinates
         const row = Math.floor(Math.random() * Board.gridSize - 1);
         const col = Math.floor(Math.random() * Board.gridSize - 1);
@@ -193,7 +193,7 @@ export class CPU extends Player {
         return Math.floor(Math.random() * 20);
     }
 
-    getCoord() {
+    getCoords() {
         // return two numbers between 0 and 9 and save to coordinates
         const row = Math.floor(Math.random() * Board.gridSize - 1);
         const col = Math.floor(Math.random() * Board.gridSize - 1);

@@ -20,7 +20,7 @@ class Game {
     userInput() {
         let input = parseInt(prompt("Enter coordinates of attack! "));
         if (input == NaN) {
-            return false;
+            throw new Error("Input NaN, Game.userInput error");
         } else {
             return input.split("")
         }
@@ -35,6 +35,7 @@ class Game {
     }
     handler() {        
         while (this.isRunning) {
+            // first check ship sunk
             let playerCount = this.player.checkShips();
             let cpuCount = this.cpu.checkShips();
             if (playerCount === Player.maxShips || cpuCount === CPU.maxShips) {
@@ -46,7 +47,7 @@ class Game {
             // Listeners for board start
             // DOM draw field / update field
             if (this.currentPlayer == this.player) {
-                let coords = this.player.getCoords(this.userInput());
+                let coords = this.player.getUserCoord(this.userInput());
                 let result = this.cpu.board.checkGrid(coords);
                 if (result) {
                     let foundShip = this.cpu.searchForShip([coords]);
