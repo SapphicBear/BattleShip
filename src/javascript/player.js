@@ -157,17 +157,13 @@ export class Player {
     searchForShip(coords) {
         let ships = Object.values(this.ships);
         for (let i = 0; i < ships.length; i++) {
-            if (ships[i].location.length !== coords.length) {
-                continue;
+            if (ships[i].location.toString() === coords.toString()) {
+                return ships[i];
             } else {
-                let result = ships[i].location.every((el) => {
-                    // zzzzzzz
-                    coords.includes(el);
-                })
-                console.log(result)
+                continue;
             }
+        }
         return false;
-    }
 }
 
     checkShips() { // zzz
@@ -248,13 +244,3 @@ export class CPU extends Player {
 // to track if the player is marked as a cpu or not
 // we need possibly to make a subclass, and put computational stuff in that one that is specifically for the CPU player.
 // 
-let player = new Player("Tay");
-let scout = new Scout(player.getUserCoord([[4, 1]]))
-let battleship = new Battleship(player.getUserCoord([[2,2],[2,3],[2,4]]));
-player.placeShip(battleship, 3)
-player.placeShip(scout, 1)
-
-player.finalPlace();
-player.checkShips();
-console.log(player.searchForShip([[4, 1]])) // zzz
-console.log(player.searchForShip([[2,2],[2,3],[2,4]]))

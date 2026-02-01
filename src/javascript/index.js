@@ -32,14 +32,20 @@ const game = {
     },
     handler() {        
         while (this.isRunning) {
+            let playerCount = this.player.checkShips();
+            let cpuCount = this.cpu.checkShips();
+            if (playerCount === Player.maxShips || cpuCount === CPU.maxShips) {
+                this.isRunning = false;
+                // gameover handler
+            }
             // Listeners for board start
             // DOM draw field / update field
             if (this.currentPlayer == this.player) {
                 let coords = this.player.getCoords(this.userInput());
                 let result = this.cpu.board.checkGrid(coords);
                 if (result) {
-                    // find ship based on coords mark hit
-                    // foundship.takeHit();
+                    let foundShip = this.cpu.searchForShip([coords]);
+                    foundShip.takeHit();
                     // change DOM to make hit
                 }
                 this.currentPlayer = this.cpu;
@@ -48,8 +54,8 @@ const game = {
                 let coords = this.cpu.getCoords();
                 let result = this.player.board.checkGrid(coords);
                 if (result) {
-                    // find ship based on coords mark hit
-                    // foundship.takeHit();
+                    let foundShip = this.player.searchForShip([coords]);
+                    foundShip.takeHit();
                     // change dom to keep track of hit
                 }
                 this.currentPlayer = this.player;
