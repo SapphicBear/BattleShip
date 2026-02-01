@@ -27,7 +27,7 @@ export class Game {
             // first check ship sunk
             let playerCount = this.player.checkShips();
             let cpuCount = this.cpu.checkShips();
-            if (playerCount === Player.maxShips || cpuCount === CPU.maxShips) {
+            if (playerCount == Player.maxShips || cpuCount == CPU.maxShips) {
                 this.isRunning = false;
                 this.gameOver();
                 // gameover handler
@@ -42,8 +42,9 @@ export class Game {
                 }
                 console.log(coords)
                 let result = this.cpu.board.checkGrid(coords);
+                console.log(result)
                 if (result == true) {
-                    let foundShip = this.cpu.searchForShip([coords]); // ZZZ edit
+                    let foundShip = this.cpu.searchForShip(coords); // ZZZ edit
                     console.log(foundShip)
                     foundShip.takeHit();
                     // change DOM to make hit
@@ -54,9 +55,12 @@ export class Game {
                 continue;
             } else {
                 let coords = this.cpu.getCoords();
+                console.log(coords)
                 let result = this.player.board.checkGrid(coords);
+                console.log(result)
                 if (result == true) {
-                    let foundShip = this.player.searchForShip([coords]);
+                    let foundShip = this.player.searchForShip(coords);
+                    console.log(foundShip)
                     foundShip.takeHit();
                     // change dom to keep track of hit
                 }
@@ -72,6 +76,6 @@ export class Game {
         } else {
             this.winner = this.player;
         }
-        console.log(`The winner is: ${this.winner}! Congrats!`);
+        console.log(`The winner is: ${this.winner.name}! Congrats!`);
     }
 };

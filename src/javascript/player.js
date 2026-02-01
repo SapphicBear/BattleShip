@@ -152,7 +152,7 @@ export class Player {
                 let coords = this.getShipCoords(1);
                 let scout = this.board.setShip(coords, 1);
                 if (scout == true) {
-                    this.ships[`Scout${i}`] = new Scout(coords)
+                    this.ships[`Scout${i}`] = new Scout([coords])
                     count++;
                     i++;
                 } else {
@@ -166,18 +166,31 @@ export class Player {
     searchForShip(coords) {
         let ships = Object.values(this.ships);
         for (let i = 0; i < ships.length; i++) {
-            if (ships[i].location.toString().includes(coords.toString())) {
-                return ships[i];
+            if (ships[i].location.length > 1) {
+                for (let j = 0; j < ships[i].location.length; j++) {
+                let ship = ships[i].location[j];
+                if (ship[0] == coords[0] && ship[1] == coords[1]) {
+                    return ships[i];
+                } else {
+                    continue;
+                }
+                }
             } else {
-                continue;
-            }
+                let ship = ships[i].location;
+                console.log(ship)
+                if (ship[0][0] == coords[0] && ship[0][1] == coords[1]) {
+                    console.log(ships[i].location)
+                    return ships[i];
+                } else {
+                    continue;
+                }
+             }
         }
         return false;
     }
 
     checkShips() { // zzz
         // search through the instance of "this.ships" for "isSunk" being "true", and counts them. Returns the number
-        let count = 0;
         let ships = Object.values(this.ships);
         for (let i = 0; i < ships.length; i++) {
             if (ships[i].isSunk == true) {
@@ -203,8 +216,8 @@ export class CPU extends Player {
 
     getCoords() {
         // return two numbers between 0 and 9 and save to coordinates
-        const row = Math.floor(Math.random() * Board.gridSize - 1);
-        const col = Math.floor(Math.random() * Board.gridSize - 1);
+        const row = Math.floor(Math.random() * (Board.gridSize - 1));
+        const col = Math.floor(Math.random() * (Board.gridSize - 1));
         return [row, col];
     }
 

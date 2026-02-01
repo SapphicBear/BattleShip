@@ -25,6 +25,7 @@ export class Board {
     checkGrid(array) {
         // Check grid for a ship based on the coordinantes, mark miss if none, mark hit if ship.
         const c = this.getCoords(array);
+        console.log(c)
         if (this.grid[c.row][c.col] === Board.shipMarker && this.grid[c.row][c.col] !== Board.missMarker && this.grid[c.row][c.col] !== Board.hitMarker) {
             this.grid[c.row][c.col] = Board.hitMarker;
             return true;
