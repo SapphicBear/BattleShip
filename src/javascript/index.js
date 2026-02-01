@@ -4,4 +4,4 @@ import "../styles.css";
 
 console.log("Success! Javascript connected!");
 
-let game = new Game();
+const game = new Game();

@@ -43,9 +43,12 @@ export class Game {
                 console.log(coords)
                 let result = this.cpu.board.checkGrid(coords);
                 if (result == true) {
-                    let foundShip = this.cpu.searchForShip([coords]);
+                    let foundShip = this.cpu.searchForShip([coords]); // ZZZ edit
+                    console.log(foundShip)
                     foundShip.takeHit();
                     // change DOM to make hit
+                } else {
+                    console.log("Miss!");
                 }
                 this.currentPlayer = this.cpu;
                 continue;

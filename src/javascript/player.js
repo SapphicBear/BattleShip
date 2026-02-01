@@ -166,7 +166,7 @@ export class Player {
     searchForShip(coords) {
         let ships = Object.values(this.ships);
         for (let i = 0; i < ships.length; i++) {
-            if (ships[i].location.toString() === coords.toString()) {
+            if (ships[i].location.toString().includes(coords.toString())) {
                 return ships[i];
             } else {
                 continue;
