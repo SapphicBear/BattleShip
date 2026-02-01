@@ -1,11 +1,9 @@
 import { Player, CPU } from "./player.js";
+import { DOM } from "./DOM.js";
 import "../styles.css";
 
 console.log("Success! Javascript connected!");
 
-const DOM = {
-
-};
 
 class Game {
     constructor() {
