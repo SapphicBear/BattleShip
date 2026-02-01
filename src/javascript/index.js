@@ -62,7 +62,10 @@ const game = {
                 this.currentPlayer = this.player;
                 continue;
             }
-
         }
     },
+    gameOver() {
+        // runs when one player reaches the max ships sunk
+        
+    }
 };
