@@ -12,6 +12,7 @@ export class Player {
     board = new Board();
     previewBoard;
     totalShips = Object.keys(this.ships).length;
+    sunkCount = 0;
 
     constructor(name) {
         this.name = name;
@@ -172,12 +173,12 @@ export class Player {
         let ships = Object.values(this.ships);
         for (let i = 0; i < ships.length; i++) {
             if (ships[i].isSunk == true) {
-                count++;
+                this.sunkCount++;
             } else {
                 continue;
             }
         }
-        return count;
+        return this.sunkCount;
     }
 
 }

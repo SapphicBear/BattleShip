@@ -9,11 +9,14 @@ const DOM = {
 
 };
 
-const game = {
-    isRunning: false,
-    player: null,
-    cpu: null,
-    currentPlayer: null,
+class Game {
+    constructor() {
+        this.isRunning = false;
+        this.player = null;
+        this.cpu = null;
+        this.currentPlayer = null;
+        this.winner = null; 
+    }
     userInput() {
         let input = parseInt(prompt("Enter coordinates of attack! "));
         if (input == NaN) {
@@ -21,7 +24,7 @@ const game = {
         } else {
             return input.split("")
         }
-    },
+    }
     initialize() {
         this.player = new Player(prompt("Please enter your name: "));
         this.cpu = new CPU();
@@ -29,13 +32,14 @@ const game = {
         this.player.initializeBoard();
         this.isRunning = true;
         this.currentPlayer = this.player; // human player goes first everytime
-    },
+    }
     handler() {        
         while (this.isRunning) {
             let playerCount = this.player.checkShips();
             let cpuCount = this.cpu.checkShips();
             if (playerCount === Player.maxShips || cpuCount === CPU.maxShips) {
                 this.isRunning = false;
+                this.gameOver();
                 // gameover handler
                 break;
             }
@@ -63,9 +67,14 @@ const game = {
                 continue;
             }
         }
-    },
+    }
     gameOver() {
         // runs when one player reaches the max ships sunk
-        
+        if (this.player.sunkCount == Player.maxShips) {
+            this.winner = this.cpu;
+        } else {
+            this.winner = this.player;
+        }
+        console.log(`The winner is: ${this.winner}! Congrats!`);
     }
 };
