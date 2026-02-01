@@ -9,27 +9,26 @@ const DOM = {
 
 class Game {
     constructor() {
-        this.isRunning = false;
-        this.player = null;
-        this.cpu = null;
-        this.currentPlayer = null;
-        this.winner = null; 
-    }
-    userInput() {
-        let input = parseInt(prompt("Enter coordinates of attack! "));
-        if (input == NaN) {
-            throw new Error("Input NaN, Game.userInput error");
-        } else {
-            return input.split("")
-        }
-    }
-    initialize() {
         this.player = new Player(prompt("Please enter your name: "));
         this.cpu = new CPU();
+        this.isRunning = false;
+        this.currentPlayer = null;
+        this.winner = null; 
+
+        this.initialize();
+        
+    }
+    userInput() {
+        let input = prompt("Enter coordinates of attack! ");
+        let coords = input.split(",")
+        return coords;
+    }
+    initialize() {
         this.cpu.initializeBoard();
         this.player.initializeBoard();
         this.isRunning = true;
         this.currentPlayer = this.player; // human player goes first everytime
+        this.handler();
     }
     handler() {        
         while (this.isRunning) {
@@ -46,8 +45,12 @@ class Game {
             // DOM draw field / update field
             if (this.currentPlayer == this.player) {
                 let coords = this.player.getUserCoord(this.userInput());
+                if (coords == false) {
+                    throw new Error("ERROR with player.getUserCoords");
+                }
+                console.log(coords)
                 let result = this.cpu.board.checkGrid(coords);
-                if (result) {
+                if (result == true) {
                     let foundShip = this.cpu.searchForShip([coords]);
                     foundShip.takeHit();
                     // change DOM to make hit
@@ -57,7 +60,7 @@ class Game {
             } else {
                 let coords = this.cpu.getCoords();
                 let result = this.player.board.checkGrid(coords);
-                if (result) {
+                if (result == true) {
                     let foundShip = this.player.searchForShip([coords]);
                     foundShip.takeHit();
                     // change dom to keep track of hit

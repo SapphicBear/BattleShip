@@ -18,18 +18,26 @@ export class Player {
         this.name = name;
     }
     getUserCoord(array) {
-        let coords = [];
-        let firstPlace = array[0];
-        coords.push(firstPlace)
-        array.forEach((item) => {
-            if (item[0] == firstPlace[0] + 1 || item[0] == firstPlace[0] - 1 || item[1] == firstPlace[1] + 1 || item[1] == firstPlace[1] - 1) {
-                coords.push(item);
-                firstPlace = item;
-            } else {
+        if (array.length > 2) {
+            let coords = [];
+            let firstPlace = array[0];
+            coords.push(firstPlace)
+            array.forEach((item) => {
+                if (item[0] == firstPlace[0] + 1 || item[0] == firstPlace[0] - 1 || item[1] == firstPlace[1] + 1 || item[1] == firstPlace[1] - 1) {
+                    coords.push(item);
+                    firstPlace = item;
+                } else {
+                    return false;
+                }
+            });
+            return coords;
+        } else {
+            if (array[0] > 9 || array[1] > 9 || array[0] < 0 || array[1] < 0) {
                 return false;
+            } else {
+                return array;
             }
-        });
-        return coords;
+        }
     }
 
     placeShip(ship) {
@@ -64,9 +72,9 @@ export class Player {
     }
     getShipCoords(size) {
         if (size == 1) {
-            return this.getCoord();
+            return this.getCoords();
         } else {
-            let initialCoord = this.getCoord();
+            let initialCoord = this.getCoords();
             let coords = [];
             coords.push(initialCoord);
             let direction = 0; // 0 is up and down, 1 is left to right
@@ -165,7 +173,7 @@ export class Player {
             }
         }
         return false;
-}
+    }
 
     checkShips() { // zzz
         // search through the instance of "this.ships" for "isSunk" being "true", and counts them. Returns the number
@@ -202,9 +210,9 @@ export class CPU extends Player {
 
     getShipCoords(size) {
         if (size == 1) {
-            return this.getCoord();
+            return this.getCoords();
         } else {
-            let initialCoord = this.getCoord();
+            let initialCoord = this.getCoords();
             let coords = [];
             coords.push(initialCoord);
             let direction = 0; // 0 is up and down, 1 is left to right
