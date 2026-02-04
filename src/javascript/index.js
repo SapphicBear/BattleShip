@@ -1,4 +1,4 @@
-import { DOM } from "./DOM.js";
+import * as DOM from "./DOM.js";
 import { Game } from "./Game.js";
 import "../styles.css";
 
