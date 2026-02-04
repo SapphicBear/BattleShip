@@ -194,6 +194,7 @@ export class Player {
         let ships = Object.values(this.ships);
         for (let i = 0; i < ships.length; i++) {
             if (ships[i].isSunk == true) {
+                console.log(`${ships[i].name} sunk!`);
                 this.sunk.add(ships[i]);
             } else {
                 continue;

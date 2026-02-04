@@ -35,3 +35,43 @@ p {
 h1, h2, h3, h4, h5, h6 {
     text-wrap: balance;
 }
+
+main {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.board {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 540px;
+    width: 530px;
+    gap: 0.14rem;    
+    border: 4px black solid;
+    background: rgb(171, 171, 245);
+}
+
+div[class*="grid"] {
+    width: 50px;
+    height: 50px;
+    border: rgb(0, 38, 163) 4px solid;
+    background: rgb(208, 211, 255);
+
+    &[class*="CPU"]:hover {
+        background: rgb(0, 94, 202);
+    }
+}
+
+div[class^="1"]:not(div[class*="CPU"]) {
+    background: rgb(82, 88, 177);
+}
+div[class^="2"] {
+    background: rgb(255, 117, 117);
+}
+div[class^="3"] {
+    background: rgb(255, 42, 42);
+}
