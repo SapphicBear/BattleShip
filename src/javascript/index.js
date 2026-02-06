@@ -6,20 +6,35 @@ import { listeners } from "./listeners.js"
 
 console.log("Success! Javascript connected!");
 const cachedDOM = DOM.cacheDOM();
-const game = new Game();
-game.initialize(DOM, cachedDOM, listeners);
+// when game starts:
 
-function gameHandler() {
-    while (game.isRunning == true) {
-        // first check ship sunk
-        let playerCount = game.player.checkShips();
-        let cpuCount = game.cpu.checkShips();
-        if (playerCount == Player.maxShips || cpuCount == CPU.maxShips) {
-            game.isRunning = false;
-            game.gameOver();
-            // gameover handler
-        } else {
-            game.handler(DOM, cachedDOM, listeners);
-        }
-    }
+function startGame() {
+    let game = new Game();
+    game.initialize();
+    DOM.renderBoard(10, game.player, cachedDOM.playerBoard);
+    DOM.renderBoard(10, game.cpu, cachedDOM.cpuBoard);
+    loadListener();
+    return game;
 }
+function gameDriver(input) {
+    let playerSunkShips = game.player.checkShips();
+    let cpuSunkShips = game.cpu.checkShips();
+    if (playerSunkShips === Player.maxShips || cpuSunkShips === CPU.maxShips) {
+        game.gameOver();
+        return;
+    }
+
+    DOM.removeBoard();
+    game.playerTurn(input);
+    game.cpuTurn();
+    DOM.renderBoard(10, game.player, cachedDOM.playerBoard);
+    DOM.renderBoard(10, game.cpu, cachedDOM.cpuBoard);
+    loadListener();
+}
+function loadListener() {
+    listeners.board((output) => {
+        let input = game.userInput(output);
+        gameDriver(input);
+    });
+}
+let game = startGame();
