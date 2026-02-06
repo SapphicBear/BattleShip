@@ -8,6 +8,12 @@ const listeners = {
             });
         });
     },
+    startButton(handler) {
+        let button = document.getElementById("start-button");
+        button.addEventListener("click", () => {
+            handler();
+        })
+    }
 };
 
 export {listeners};

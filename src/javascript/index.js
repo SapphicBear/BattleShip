@@ -4,11 +4,20 @@ import "../styles.css";
 import { Player, CPU } from "./player.js";
 import { listeners } from "./listeners.js"
 
-console.log("Success! Javascript connected!");
-const cachedDOM = DOM.cacheDOM();
+function drawSiteDefault() {
+    let default1 = new Player("default");
+    let default2 = new CPU();
+    DOM.renderBoard(10, default1, cachedDOM.playerBoard);
+    DOM.renderBoard(10, default2, cachedDOM.cpuBoard);
+    cachedDOM.cpuBoard.classList.add("inactive");
+    cachedDOM.playerBoard.classList.add("inactive");
+}
 // when game starts:
 
 function startGame() {
+    cachedDOM.cpuBoard.classList.remove("inactive");
+    cachedDOM.playerBoard.classList.remove("inactive");
+    DOM.removeBoard();
     let game = new Game();
     game.initialize();
     DOM.renderBoard(10, game.player, cachedDOM.playerBoard);
@@ -37,4 +46,9 @@ function loadListener() {
         gameDriver(input);
     });
 }
-let game = startGame();
+
+//
+console.log("Success! Javascript connected!");
+const cachedDOM = DOM.cacheDOM();
+drawSiteDefault();
+// let game = startGame();
