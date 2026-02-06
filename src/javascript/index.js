@@ -50,6 +50,7 @@ function gameDriver(input) {
 }
 function loadListener() {
     listeners.board((output) => {
+        game.isRunning = true;
         let input = game.userInput(output);
         gameDriver(input);
     });
@@ -61,8 +62,16 @@ let game;
 const cachedDOM = DOM.cacheDOM();
 drawSiteDefault();
 listeners.resetButton(() => {
-    DOM.clearLog();
-    drawSiteDefault();
+    if (game && game.isRunning == false) {
+        game.player.initializeBoard();
+        DOM.removeBoard();
+        DOM.renderBoard(10, game.player, cachedDOM.playerBoard);
+        DOM.renderBoard(10, game.cpu, cachedDOM.cpuBoard);
+    } else {
+        return;
+    }
+    loadListener();
+
 });
 listeners.startButton(() => {
     game = startGame();

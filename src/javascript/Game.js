@@ -17,7 +17,7 @@ export class Game {
         this.cpu.initializeBoard();
         this.player.initializeBoard();
         this.currentPlayer = this.player; // human player goes first everytime
-        this.isRunning = true;
+        // this.isRunning = true;
         
     }
     playerTurn(input) {

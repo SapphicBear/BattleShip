@@ -112,6 +112,8 @@ export class Player {
     }
 
     initializeBoard() {
+        this.ships = {};
+        this.board = new Board();
         let count = 0;
         while (count < Player.maxShips) {
             while (true) {

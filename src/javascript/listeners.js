@@ -20,6 +20,12 @@ const listeners = {
             handler();
         });
     },
+    // rerollButton(handler) {
+    //     let reroll = document.getElementById("reroll-button");
+    //     reroll.addEventListener("click", () => {
+    //         handler();
+    //     });
+    // },
 };
 
 export {listeners};
