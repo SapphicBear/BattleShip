@@ -44,7 +44,10 @@ ul, li {
 li {
     list-style: none;
 }
-
+body {
+    display: grid;
+    grid-auto-flow: row;
+}
 header {
     color:  rgb(251, 251, 255);
     margin-top: 1rem;
@@ -58,7 +61,7 @@ main {
     gap: 2rem;
     padding: 1rem;
 }
-.info-area, .log-area, .score-area, .button-area {
+.info-area, .log-area, .score-area, .button-area, .title, .info-footer, footer {
     border: 4px rgba(39, 0, 179, 0.842) solid;
     border-top: rgb(133, 145, 255) 4px solid;
     border-left-color: rgb(133, 145, 255);
@@ -66,40 +69,66 @@ main {
     padding: 1rem;
 }
 .info-area {
+
+    .title {
+        width: 28ch;
+    }
     gap: 2rem;
     text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
     padding-top: 1rem;
 
     .button-area {
-        
+        width: 28ch;
         gap: 1rem;
         display: flex;
+        justify-content: center;
     }
     .score-area {
         display: flex;
         gap: 2rem;
         flex-direction: column;
         align-items: start;
-        width: 26ch;
+        width: 28ch;
+        & > h4 {
+            text-align: left;
+            padding: 0.4rem;
+            
+            > h4 {
+                color: rgb(2, 2, 192);
+            }
+        }
     }
 
     .log-area{
         display: flex;
-        flex-flow: column wrap;
+        flex-flow: column;
         align-items: start;
         padding: 1rem;
         margin: 1rem;
-        width: 26ch;
-        min-height: 300px;
+        width: 28ch;
+        height: 300px;
         > ul {
+            color: rgb(2, 2, 192);
             text-align: left;
             display: flex; 
             flex-direction: column;
             align-items: flex-start;
+        }
+    }
+    .info-footer {
+        min-width: 28ch;
+        summary {
+            text-align: left;
+        } 
+        > ul {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        gap: 0.4rem;
         }
     }
 }
@@ -117,8 +146,8 @@ main {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    height: 540px;
-    width: 530px;
+    height: 700px;
+    width: 700px;
     gap: 0.14rem;    
     border: 4px rgba(39, 0, 179, 0.842) solid;
     border-top: rgb(133, 145, 255) 4px solid;
@@ -127,8 +156,8 @@ main {
 }
 
 div[class*="grid"] {
-    width: 50px;
-    height: 50px;
+    width: 67px;
+    height: 65px;
     border: rgba(30, 0, 163, 0.938) 4px solid;
     border-top: rgb(133, 145, 255) 4px solid;
     border-left-color: rgb(133, 145, 255);
@@ -143,8 +172,41 @@ div[class^="1"]:not(div[class*="CPU"]) {
     background: rgb(82, 88, 177);
 }
 div[class^="2"] {
-    background: rgb(255, 117, 117);
+    position: relative;
+    background: rgb(255, 201, 86);
+    &::after {
+        position: absolute;
+        top: 22px;
+        left: 18px;
+        display: inline-block;
+        content: "O";
+        font-size: 40px;
+        color: rgb(172, 117, 0);
+    }
 }
 div[class^="3"] {
+    position: relative;
     background: rgb(255, 42, 42);
+    &::after {
+        position: absolute;
+        top: 22px;
+        left: 18px;
+        display: inline-block;
+        content: "X";
+        font-size: 40px;
+        color: rgb(99, 0, 0);
+    }
+}
+footer {
+    position: relative;
+    bottom: 4rem;
+    place-self: center;
+
+    width: 500px;
+    padding: 1rem;
+    & > ul {
+        display: flex;
+        gap: 2rem;
+        justify-content: space-around;
+    }
 }

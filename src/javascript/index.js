@@ -30,13 +30,6 @@ function startGame() {
     return game;
 }
 function gameDriver(input) {
-    let playerSunkShips = game.player.checkShips();
-    let cpuSunkShips = game.cpu.checkShips();
-    if (playerSunkShips === Player.maxShips || cpuSunkShips === CPU.maxShips) {
-        DOM.printLog(game.gameOver());
-        return;
-    }
-
     DOM.removeBoard();
     let playerTurn = game.playerTurn(input);
     let cpuTurn = game.cpuTurn();
@@ -45,6 +38,14 @@ function gameDriver(input) {
     DOM.printScores(game.cpu.checkShips(), game.player.checkShips(), cachedDOM);
     DOM.printLog(playerTurn);
     DOM.printLog(cpuTurn);
+    
+    let playerSunkShips = game.player.checkShips();
+    let cpuSunkShips = game.cpu.checkShips();
+    if (playerSunkShips === Player.maxShips || cpuSunkShips === CPU.maxShips) {
+        DOM.printLog(game.gameOver());
+        return;
+    }
+    
     loadListener();
 }
 function loadListener() {

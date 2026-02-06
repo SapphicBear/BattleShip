@@ -46,9 +46,8 @@ function printScores(input1, input2, dom) {
 
 function printLog(input) {
     let prevLi = document.querySelectorAll(".log-item");
-    if (prevLi.length > 5) {
+    if (prevLi.length > 6) {
         prevLi[0].remove();
-        prevLi[1].remove();
     }
     let log = document.querySelector(".log");
     let li = document.createElement("li");
