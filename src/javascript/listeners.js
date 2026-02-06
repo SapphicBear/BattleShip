@@ -13,7 +13,13 @@ const listeners = {
         button.addEventListener("click", () => {
             handler();
         })
-    }
+    },
+    resetButton(handler) {
+        let resetButton = document.getElementById("reset-button");
+        resetButton.addEventListener("click", () => {
+            handler();
+        });
+    },
 };
 
 export {listeners};

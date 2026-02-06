@@ -25,32 +25,33 @@ export class Game {
             if (coords == false) {
                 throw new Error("ERROR with player.getUserCoords");
             }
-            console.log(coords)
             let result = this.cpu.board.checkGrid(coords);
-            console.log(result)
             if (result == true) {
                 let foundShip = this.cpu.searchForShip(coords); // ZZZ edit
-                console.log(foundShip)
                 foundShip.takeHit();
+                this.currentPlayer = this.cpu;
+                return `HIT: Player hit ship at location: ${+coords[1] + 1}, ${+coords[0] + 1}!`
                 // change DOM to make hit
             } else {
-                console.log("Miss!");
+                this.currentPlayer = this.cpu;
+                return "Miss!";
             }
-            this.currentPlayer = this.cpu;
+            
     }
     cpuTurn() {
         let coords = this.cpu.getCoords();
-            console.log(coords)
             let result = this.player.board.checkGrid(coords);
-            console.log(result)
             if (result == true) {
                 let foundShip = this.player.searchForShip(coords);
-                console.log(foundShip)
                 foundShip.takeHit();
-                // change dom to keep track of hit
+                this.currentPlayer = this.player;
+                return `HIT: CPU hit ship at location: ${+coords[1] + 1}, ${+coords[0] + 1}!`
                 
+            } else {
+                this.currentPlayer = this.player;
+                return "Miss!";
             }
-            this.currentPlayer = this.player
+            
     }
     gameOver() {
         // runs when one player reaches the max ships sunk
@@ -59,6 +60,7 @@ export class Game {
         } else {
             this.winner = this.player;
         }
-        console.log(`The winner is: ${this.winner.name}! Congrats!`);
+        this.isRunning = false;
+        return `The winner is: ${this.winner.name}! Congrats!`;
     }
 };

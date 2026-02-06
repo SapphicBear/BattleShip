@@ -5,12 +5,15 @@ import { Player, CPU } from "./player.js";
 import { listeners } from "./listeners.js"
 
 function drawSiteDefault() {
+    DOM.removeBoard();
     let default1 = new Player("default");
     let default2 = new CPU();
     DOM.renderBoard(10, default1, cachedDOM.playerBoard);
     DOM.renderBoard(10, default2, cachedDOM.cpuBoard);
     cachedDOM.cpuBoard.classList.add("inactive");
     cachedDOM.playerBoard.classList.add("inactive");
+    DOM.printLog("Start a new game!");
+    DOM.printScores("", "", cachedDOM);
 }
 // when game starts:
 
@@ -22,6 +25,7 @@ function startGame() {
     game.initialize();
     DOM.renderBoard(10, game.player, cachedDOM.playerBoard);
     DOM.renderBoard(10, game.cpu, cachedDOM.cpuBoard);
+    DOM.printScores(0, 0, cachedDOM)
     loadListener();
     return game;
 }
@@ -29,15 +33,18 @@ function gameDriver(input) {
     let playerSunkShips = game.player.checkShips();
     let cpuSunkShips = game.cpu.checkShips();
     if (playerSunkShips === Player.maxShips || cpuSunkShips === CPU.maxShips) {
-        game.gameOver();
+        DOM.printLog(game.gameOver());
         return;
     }
 
     DOM.removeBoard();
-    game.playerTurn(input);
-    game.cpuTurn();
+    let playerTurn = game.playerTurn(input);
+    let cpuTurn = game.cpuTurn();
     DOM.renderBoard(10, game.player, cachedDOM.playerBoard);
     DOM.renderBoard(10, game.cpu, cachedDOM.cpuBoard);
+    DOM.printScores(game.cpu.checkShips(), game.player.checkShips(), cachedDOM);
+    DOM.printLog(playerTurn);
+    DOM.printLog(cpuTurn);
     loadListener();
 }
 function loadListener() {
@@ -49,6 +56,14 @@ function loadListener() {
 
 //
 console.log("Success! Javascript connected!");
+let game;
 const cachedDOM = DOM.cacheDOM();
 drawSiteDefault();
-// let game = startGame();
+listeners.resetButton(() => {
+    DOM.clearLog();
+    drawSiteDefault();
+});
+listeners.startButton(() => {
+    game = startGame();
+    DOM.clearLog();
+});

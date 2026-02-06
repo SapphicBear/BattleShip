@@ -12,6 +12,8 @@
 body {
     line-height: calc(1em + 0.5rem);
     -webkit-font-smoothing: antialiased;
+    height: 100vh;
+    background: rgb(114, 98, 255);
 }
 img {
     max-width: 100%;
@@ -35,12 +37,79 @@ p {
 h1, h2, h3, h4, h5, h6 {
     text-wrap: balance;
 }
+ul, li {
+    padding: 0;
+    margin: 0;
+}
+li {
+    list-style: none;
+}
 
+header {
+    color:  rgb(251, 251, 255);
+    margin-top: 1rem;
+    padding: 1rem;
+    place-self: center;
+}
 main {
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 0.5fr 2fr;
     gap: 2rem;
+    padding: 1rem;
+}
+.info-area, .log-area, .score-area, .button-area {
+    border: 4px rgba(39, 0, 179, 0.842) solid;
+    border-top: rgb(133, 145, 255) 4px solid;
+    border-left-color: rgb(133, 145, 255);
+    background: rgb(216, 216, 255);
+    padding: 1rem;
+}
+.info-area {
+    gap: 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 1rem;
+
+    .button-area {
+        
+        gap: 1rem;
+        display: flex;
+    }
+    .score-area {
+        display: flex;
+        gap: 2rem;
+        flex-direction: column;
+        align-items: start;
+        width: 26ch;
+    }
+
+    .log-area{
+        display: flex;
+        flex-flow: column wrap;
+        align-items: start;
+        padding: 1rem;
+        margin: 1rem;
+        width: 26ch;
+        min-height: 300px;
+        > ul {
+            text-align: left;
+            display: flex; 
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+}
+
+.game-area {
+    display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    gap: 2rem;
 }
 
 .board {
@@ -51,14 +120,18 @@ main {
     height: 540px;
     width: 530px;
     gap: 0.14rem;    
-    border: 4px black solid;
+    border: 4px rgba(39, 0, 179, 0.842) solid;
+    border-top: rgb(133, 145, 255) 4px solid;
+    border-left-color: rgb(133, 145, 255);
     background: rgb(171, 171, 245);
 }
 
 div[class*="grid"] {
     width: 50px;
     height: 50px;
-    border: rgb(0, 38, 163) 4px solid;
+    border: rgba(30, 0, 163, 0.938) 4px solid;
+    border-top: rgb(133, 145, 255) 4px solid;
+    border-left-color: rgb(133, 145, 255);
     background: rgb(208, 211, 255);
 
     &[class*="CPU"]:hover {
