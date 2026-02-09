@@ -12,9 +12,18 @@ function renderBoard(size, player, dom) {
     let max = size * size;
     for (let i = 0; i < size; i++) {
         for (let j = 0; j < size; j++) {
-            const grid = document.createElement("div");
-            grid.className = `${player.board.grid[i][j]}-${player.name} grid-${i}${j}`;
-            dom.appendChild(grid);
+            if (player.name !== "CPU") {
+                const grid = document.createElement("div");
+                grid.className = `${player.board.grid[i][j]}-${player.name} grid-${i}${j}`;
+                dom.appendChild(grid);
+            } else {
+                const grid = document.createElement("button");
+                grid.setAttribute("type", "button");
+                grid.className = `${player.board.grid[i][j]}-${player.name} grid-${i}${j}`;
+                dom.appendChild(grid);
+
+            }
+            
         }
     }
 }

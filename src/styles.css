@@ -155,7 +155,7 @@ main {
     background: rgb(171, 171, 245);
 }
 
-div[class*="grid"] {
+button[class*="grid"], div[class*="grid"] {
     width: 67px;
     height: 65px;
     border: rgba(30, 0, 163, 0.938) 4px solid;
@@ -163,15 +163,15 @@ div[class*="grid"] {
     border-left-color: rgb(133, 145, 255);
     background: rgb(208, 211, 255);
 
-    &[class*="CPU"]:hover {
+    &[class*="CPU"]:hover, &[class*="CPU"]:focus {
         background: rgb(0, 94, 202);
     }
 }
 
-div[class^="1"]:not(div[class*="CPU"]) {
+button[class^="1"]:not(button[class*="CPU"]), div[class^="1"]:not(button[class*="CPU"]) {
     background: rgb(82, 88, 177);
 }
-div[class^="2"] {
+button[class^="2"], div[class^="2"] {
     position: relative;
     background: rgb(255, 201, 86);
     &::after {
@@ -184,7 +184,7 @@ div[class^="2"] {
         color: rgb(172, 117, 0);
     }
 }
-div[class^="3"] {
+button[class^="3"], div[class^="3"] {
     position: relative;
     background: rgb(255, 42, 42);
     &::after {
