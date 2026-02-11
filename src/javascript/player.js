@@ -181,7 +181,6 @@ export class Player {
                 let ship = ships[i].location;
                 console.log(ship)
                 if (ship[0][0] == coords[0] && ship[0][1] == coords[1]) {
-                    console.log(ships[i].location)
                     return ships[i];
                 } else {
                     continue;
