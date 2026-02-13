@@ -212,3 +212,59 @@ footer {
         justify-content: space-around;
     }
 }
+
+@media (max-width: 1100px) {
+    body {
+        max-height: 100vh;
+        overflow: hidden;
+    }
+    main {
+        display: flex;
+        gap: 1rem 5rem;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+    .info-area {
+        max-height: 89.2vh;
+    }
+    .game-area {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+        
+    }
+    .board {
+        height: 430px;
+        width: 430px;
+    }
+
+    button[class*="grid"], div[class*="grid"] {
+        width: 40.3px;
+        height: 39px;
+    }
+
+    button[class^="2"], div[class^="2"] {
+        &::after {
+            font-size: 2.2rem;
+            top: 7px;
+            left: 7px;
+        }   
+    }
+    button[class^="3"], div[class^="3"] {
+        &::after {
+            font-size: 2.2rem;
+            top: 7px;
+            left: 7px;
+        }
+    }
+    footer {
+        max-width: 37.6ch;
+        position: absolute;
+        bottom: 0.5rem;
+        ul {
+            font-size: 13.5px;
+        }
+    }
+}
